@@ -20,4 +20,8 @@ b = np.array(
 
 print(np.dot(a, b))
 
-
+b = np.arange(9, -1, -1)
+print('new argsorted b: ', np.argsort(b))
+print('original b:      ', b)
+b.sort()
+print('sorted b:        ', np.sort(b))
