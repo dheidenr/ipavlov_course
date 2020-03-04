@@ -25,3 +25,5 @@ print('new argsorted b: ', np.argsort(b))
 print('original b:      ', b)
 b.sort()
 print('sorted b:        ', np.sort(b))
+
+print('worked in windows 10')
