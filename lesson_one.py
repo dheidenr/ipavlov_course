@@ -1,4 +1,5 @@
 import numpy as np
+import math
 import matplotlib.pyplot as plt
 from scipy.optimize import minimize
 from scipy.integrate import quad, odeint
@@ -30,6 +31,35 @@ print('original b:      ', b)
 b.sort()
 print('sorted b:        ', np.sort(b))
 
+a = np.arange(10, -1, -1)
+a = np.delete(a, [5, 7])  # Удалены элементы с индексом 5 и 7
+print(a)
+
+a = np.insert(a, [2, 3], [-100, -200])
+print(a)
+
+a = np.append(a, [6, 6, 6])
+print(a)
+
+x = [
+    [1, 2, 3],
+    [4, 5, 6]
+    ]
+a = np.array(x)
+print('a.len:', len(a))  # Высота
+print('a.shape:', a.shape)  # Фигура
+
+print(list(range(8)))
+print(*range(0, 8))  # * - передает в функцию элементы через запятую
+print([2, 5])
+print(2, 5)
+
+print(np.arange(0, -8, -0.5))
+
+# %time np.arange(0, 50000000)
+
+
+# Дополнительные материалы 1.3 продвинутый курс видео: "2. Numpy и линейная алгебра: семинар (27.09.19)"
 print('worked in windows 10')
 
 np.arange(0, 50000000)
@@ -122,3 +152,5 @@ print(np.sqrt(np.pi) / 2, res, err)
 res, err = quad(f, 0, 1)
 print(np.sqrt(np.pi) / 2 * erf(1), res, err)
 
+
+# Дополнительные материалы "3. Библиотеки Pandas и Matplotlib: семинар"
