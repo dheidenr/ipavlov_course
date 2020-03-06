@@ -47,7 +47,7 @@ print(a)
 x = [
     [1, 2, 3],
     [4, 5, 6]
-    ]
+]
 a = np.array(x)
 print('a.len:', len(a))  # Высота
 print('a.shape:', a.shape)  # Фигура
@@ -161,7 +161,8 @@ print(np.sqrt(np.pi) / 2 * erf(1), res, err)
 # Дополнительные материалы "3. Библиотеки Pandas и Matplotlib: семинар"
 #######################################################################
 # Pandas
-print('#######################################################################\n# Дополнительные материалы "3. Библиотеки Pandas и Matplotlib: семинар"\n#######################################################################')
+print(
+    '#######################################################################\n# Дополнительные материалы "3. Библиотеки Pandas и Matplotlib: семинар"\n#######################################################################')
 print(os.getcwd())
 data = pd.read_csv('lesson_one/AppleStore.csv')
 print('-----------------------------------------------------------------------')
@@ -200,7 +201,6 @@ print(len(data[(data['user_rating'] > 4.9999999999999995) & (data['prime_genre']
 print(len(data[(data['user_rating'] > 4.9999999999999996) & (data['prime_genre'] == 'Games')]['track_name']))
 print(np.unique(data['prime_genre']))  # Все жанры
 
-
 print(np.array(data['size_bytes'].values))
 
 #  Matplotlib
@@ -227,7 +227,7 @@ plt.show()
 
 print('bar')
 plt.bar(x, family_ivan, alpha=0.9
-      , label='Ивановы', color='r')
+        , label='Ивановы', color='r')
 plt.bar(x, family_sid, alpha=0.6, label='Сидоровы', color='b')
 plt.title('Статистика больных')
 plt.ylabel('Кол-во больных')
@@ -251,8 +251,9 @@ plt.xlabel('T температура')
 plt.legend()
 plt.show()
 
-print('поиск оптимальной температуры')
+print('Поиск оптимальной температуры')
 from scipy.optimize import minimize
+
 max_ivan = minimize(f_ivan, x0=4)
 max_sid = minimize(f_sid, x0=4)
 xnew = np.arange(0, 8.5, 0.1)
@@ -267,4 +268,3 @@ plt.ylabel('Кол-во больных')
 plt.xlabel('T температура')
 plt.legend()
 plt.show()
-
