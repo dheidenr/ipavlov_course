@@ -48,3 +48,4 @@ for i in range(0, 100, 1):
     print(almost_double_factorial_rec(i), '=', almost_double_factorial(i))
     if almost_double_factorial_rec(i) != almost_double_factorial(i):
         print('ERROR: i = ', i)
+
