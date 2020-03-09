@@ -39,6 +39,8 @@ def fractal(number):
         return 1
     return number * fractal(number - 1)
 
+# Тоже правильный вариант решения первой задачи, но ломается на сервере из-за
+# превышения стека вызовов.
 def almost_double_factorial_rec(num):
     num -= 0 if num % 2 != 0 else 1
     return 1 if num <= 2 else num * almost_double_factorial_rec(num - 2)
@@ -49,3 +51,20 @@ for i in range(0, 100, 1):
     if almost_double_factorial_rec(i) != almost_double_factorial(i):
         print('ERROR: i = ', i)
 
+# 3.1.9
+# Пусть у нас есть следующий список, в котором элементы -- tuple из строк:
+#
+# items = [('one', 'two'), ('three', 'four'), ('five', 'six'), ('string', 'a')]
+# Мы хотим отсортировать этот список по последней букве второго элемента каждого
+# tuple, т.е. получить такой список:
+# sorted_items = [ ('string', 'a'), ('one', 'two'), ('three', 'four'), ('five', 'six'),]
+#
+# Что нужно вставить вместо "<...>" в следующем выражении,
+# чтобы получить верную сортировку?
+#
+# sorted_items = sorted(items, key=lambda x: <...>)
+# P.S.: в ответе не должно фигурировать слово len
+
+# code
+# items объявлять не нужно
+# sorted_items = sorted(items, key=lambda x: <YOUR CODE>)
