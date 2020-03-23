@@ -22,3 +22,4 @@ v2 = [-1, 0.4, 2]
 print(numpy_scalar(np.array(v1, float), np.array(v2, float)))
 print(numpy_scalar(np.array(v1), np.array(v2)))
 print(no_numpy_scalar(v1, v2))
+

@@ -1,6 +1,7 @@
 import numpy as np
 import itertools
 
+
 def encode(a):
     elements = np.array([])
     amount = np.array([])
@@ -28,5 +29,4 @@ def optimal_encode(a):
 a = np.array([1, 2, 2, 3, 3, 1, 1, 5, 5, 2, 3, 3])
 print(encode(a))
 print(optimal_encode(a))
-
 
