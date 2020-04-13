@@ -6,7 +6,7 @@ import sys
 
 
 def f(x):
-    return x**4 + 5*x**3 - 10*x
+    return x ** 4 + 5 * x ** 3 - 10 * x
 
 
 x = np.linspace(-5, 2, 100)
@@ -16,13 +16,14 @@ plt.figure(figsize=(10, 7))
 plt.plot(x, y)
 plt.ylabel("Y")
 plt.xlabel("X")
-plt.scatter([-3.5518, -0.9439, 0.7457], [f(-3.5518), f(-0.9439), f(0.7457)], lw=5)
+plt.scatter([-3.5518, -0.9439, 0.7457], [f(-3.5518), f(-0.9439), f(0.7457)],
+            lw=5)
 
 plt.show()
 
 
 def f(x):
-    return x**4
+    return x ** 4
 
 
 x = np.linspace(1, 15, 100)
@@ -38,7 +39,7 @@ plt.show()
 
 # Нахождение экстремума
 def f(x):
-    return 4*x**2 - 3*x + 5
+    return 4 * x ** 2 - 3 * x + 5
 
 
 def f(x):
@@ -59,28 +60,27 @@ def plot_function(f):
 
 plot_function(f)
 
-
 print((math.exp(2.718)) * (math.log(2.718) + 1))
 
 print(sys.float_info.epsilon)
-print(math.log(2)/1)
+print(math.log(2) / 1)
 
 
 def f(x):
-    return x*x
+    return x * x
 
 
 def numerical_derivative_1d(func, epsilon=0.00001):
-
     def deriv_func(x):
         # YOUR CODE
-        result = (func(x + epsilon) - func(x))/epsilon
-        return result # YOUR CODE
+        result = (func(x + epsilon) - func(x)) / epsilon
+        return result  # YOUR CODE
 
     return deriv_func
 
+
 deriv = numerical_derivative_1d(f, 0.00001)
-print(deriv(1.0)) # 2  ОК. Производная  для х*х = 2*х = 2*1 = 2
+print(deriv(1.0))  # 2  ОК. Производная  для х*х = 2*х = 2*1 = 2
 
 
 def grad_descent_v1(func, deriv, start=None, callback=None):
@@ -117,129 +117,229 @@ def grad_descent_v1(func, deriv, start=None, callback=None):
     return estimate
 
 
-def grad_descent_v1(func, deriv, start=None, callback=None):
-    """
-    Реализация градиентного спуска для функций с одним локальным минимумом,
-    совпадающим с глобальным. Все тесты будут иметь такую природу.
-    :param func: float -> float — функция
-    :param deriv: float -> float — её производная
-    :param start: float — начальная точка
-    """
-    if start is None:
-        # Если точка не дана, сгенерируем случайную
-        # из стандартного нормального распределения.
-        # При таком подходе начальная точка может быть
-        # любой, а не только из какого-то ограниченного диапазона
-        # np.random.seed(179)
-        start = np.random.randn()
-
-    def sign(number):
-        return 1.0 if number >= 0 else -1.0
-
-    def regression(length, estimate, step):
-        first = estimate
-        sign_d = deriv(first)
-        sign_f = sign(first)
-        for i in range(length):
-            if sign(deriv(estimate)) == sign_f:
-                estimate = estimate - sign(first) * step
-            else:
-                return estimate
-        return estimate
-
-
-
-
-
-    def plot_function(f, x_points, y_points):
-        plt.figure(figsize=(10, 7))
-        x = np.linspace(-1, 1, 100)
-        # y = list(map(f, x))
-        y = [f(xn) for xn in x]
-
-        plt.plot(x, y)
-        plt.plot(x_points, y_points)
-        plt.ylabel("Y")
-        plt.xlabel("X")
-        plt.scatter(x_points, y_points, lw=5)
-        plt.show()
-
-    if start > 1: start = 1
-    estimate = start
-    # # callback(estimate, func(estimate))  # не забывайте логировать шаги!
-    #
-    # # YOUR CODE
-    # # r = p(estimate)
-    #
-    print('estimate =', estimate)
-    print('deriv(estimate) =', deriv(estimate))
-    x_points_func = []
-    y_points_func = []
-    x_points_deriv = []
-    y_points_deriv = []
-    # x = estimate
-    # y = func(estimate)
-    # dx = estimate
-    # dy = func(x + dx) - func(x)
-    # dy_prev = dy + 00000000000.1
-    # for i in range(100):
-    # # while abs(dy_prev > dy):
-    #     dy_prev = dy
-    #     dx = dx - dx / 2
-    #     dy = (func(x + dx) - func(x))
-    #     # print('dx =', dx)
-    #     # print('dy =', dy)
-    #     dfy = func(dx)
-    #     print('dx =', dx)
-    #     print('dy =', dy)
-    #     print('dfy =', dfy)
-    #     print('dy_prev =', dy_prev)
-    #     x_points_func.append(dx)
-    #     y_points_func.append(dy)
-    # print('dx =', dx)
-    # print('dy =', dy)
-    # print('x_points', x_points_func, 'y_points', y_points_func)
-    # plot_function(func, x_points_func, y_points_func)
-
-    step = 2.0
-    for i in range(100):
-        estimate = regression(100, estimate, step)
-        step /= 1.1
-        x_points_func.append(estimate)
-        y_points_func.append(func(estimate))
-    print('dx =', estimate)
-    print('dy =', func(estimate))
-    print('x_points', x_points_func, 'y_points', y_points_func)
-    plot_function(func, x_points_func, y_points_func)
-
-    # step = 1
-    # prev_d = deriv(estimate)
-    # while abs(deriv(estimate)) > 0.01:
-    #     if deriv(estimate) <= 0:
-    #         estimate = estimate + 0.001
-    #     else:
-    #         estimate = estimate - 0.001
-        # estimate += 0.001 if deriv(estimate) <= 0 else -0.001
-        # callback(estimate, func(estimate))  # не забывайте логировать шаги!
-    # print('estimate =', estimate)
-    # print('p =', round(deriv(estimate), 4))
-    # if dx < 9.353056857089389e-16:
-    #     dx = 0.0
-    return estimate
+# def grad_descent_v1(func, deriv, start=None, callback=None):
+#     """
+#     Реализация градиентного спуска для функций с одним локальным минимумом,
+#     совпадающим с глобальным. Все тесты будут иметь такую природу.
+#     :param func: float -> float — функция
+#     :param deriv: float -> float — её производная
+#     :param start: float — начальная точка
+#     """
+#     if start is None:
+#         # Если точка не дана, сгенерируем случайную
+#         # из стандартного нормального распределения.
+#         # При таком подходе начальная точка может быть
+#         # любой, а не только из какого-то ограниченного диапазона
+#         # np.random.seed(179)
+#         start = np.random.randn()
+#
+#     def sign(number):
+#         return 1.0 if number >= 0 else -1.0
+#
+#     def regression(length, estimate, step):
+#         first = estimate
+#         sign_d = deriv(first)
+#         sign_f = sign(first)
+#         for i in range(length):
+#             if sign(deriv(estimate)) == sign_f:
+#                 estimate = estimate - sign(first) * step
+#             else:
+#                 return estimate
+#         return estimate
+#
+#     def plot_function(f, x_points, y_points):
+#         plt.figure(figsize=(10, 7))
+#         x = np.linspace(-1, 1, 100)
+#         # y = list(map(f, x))
+#         y = [f(xn) for xn in x]
+#
+#         plt.plot(x, y)
+#         plt.plot(x_points, y_points)
+#         plt.ylabel("Y")
+#         plt.xlabel("X")
+#         plt.scatter(x_points, y_points, lw=5)
+#         plt.show()
+#
+#     if start > 1: start = 1
+#     estimate = start
+#     # # callback(estimate, func(estimate))  # не забывайте логировать шаги!
+#     #
+#     # # YOUR CODE
+#     # # r = p(estimate)
+#     #
+#     print('estimate =', estimate)
+#     print('deriv(estimate) =', deriv(estimate))
+#     x_points_func = []
+#     y_points_func = []
+#     x_points_deriv = []
+#     y_points_deriv = []
+#     # x = estimate
+#     # y = func(estimate)
+#     # dx = estimate
+#     # dy = func(x + dx) - func(x)
+#     # dy_prev = dy + 00000000000.1
+#     # for i in range(100):
+#     # # while abs(dy_prev > dy):
+#     #     dy_prev = dy
+#     #     dx = dx - dx / 2
+#     #     dy = (func(x + dx) - func(x))
+#     #     # print('dx =', dx)
+#     #     # print('dy =', dy)
+#     #     dfy = func(dx)
+#     #     print('dx =', dx)
+#     #     print('dy =', dy)
+#     #     print('dfy =', dfy)
+#     #     print('dy_prev =', dy_prev)
+#     #     x_points_func.append(dx)
+#     #     y_points_func.append(dy)
+#     # print('dx =', dx)
+#     # print('dy =', dy)
+#     # print('x_points', x_points_func, 'y_points', y_points_func)
+#     # plot_function(func, x_points_func, y_points_func)
+#
+#     step = 2.0
+#     for i in range(100):
+#         estimate = regression(100, estimate, step)
+#         step /= 1.1
+#         x_points_func.append(estimate)
+#         y_points_func.append(func(estimate))
+#     print('dx =', estimate)
+#     print('dy =', func(estimate))
+#     print('x_points', x_points_func, 'y_points', y_points_func)
+#     plot_function(func, x_points_func, y_points_func)
+#
+#     # step = 1
+#     # prev_d = deriv(estimate)
+#     # while abs(deriv(estimate)) > 0.01:
+#     #     if deriv(estimate) <= 0:
+#     #         estimate = estimate + 0.001
+#     #     else:
+#     #         estimate = estimate - 0.001
+#     # estimate += 0.001 if deriv(estimate) <= 0 else -0.001
+#     # callback(estimate, func(estimate))  # не забывайте логировать шаги!
+#     # print('estimate =', estimate)
+#     # print('p =', round(deriv(estimate), 4))
+#     # if dx < 9.353056857089389e-16:
+#     #     dx = 0.0
+#     return estimate
 
 
 # print('grad_descent_v1:\n', grad_descent_v1(lambda x: x * x, lambda x: 2 * x))
 
-print('grad_descent_v1:\n', grad_descent_v1(lambda x: math.log10(x ** 2) + 1, lambda x: 2 / x))
+# print('grad_descent_v1:\n',
+#       grad_descent_v1(lambda x: math.log10(x ** 2) + 1, lambda x: 2 / x))
+#
+# print('grad_descent_v1:\n', grad_descent_v1(
+#     lambda x:
+#     x ** 8 + x ** 7 + x ** 6 + x ** 5 + x ** 4 + x ** 3 + x ** 2 + x + 2,
+#     lambda x:
+#     8 * (x ** 7) + 7 * (x ** 6) + 6 * (x ** 5) + 5 * (x ** 4) + 4 * (x ** 3) +
+#     3 * (x ** 2) + 2 * (x ** 1) + x))
 
-print('grad_descent_v1:\n', grad_descent_v1(
-    lambda x:
-    x ** 8 + x ** 7 + x ** 6 + x ** 5 + x ** 4 + x ** 3 + x ** 2 + x + 2,
-    lambda x:
-    8 * (x ** 7) + 7 * (x ** 6) + 6 * (x ** 5) + 5 * (x ** 4) + 4 * (x ** 3) +
-    3 * (x ** 2) + 2 * (x ** 1) + x))
 
 # "func" : lambda x: np.log((x + 1)**2 + 1),
 #         "deriv" : lambda x: 2 * (x + 1) / (x**2 +1),
 # print(11/2)
 
+
+def grad_descent_v2(func, deriv, low=None, high=None, callback=None):
+    if low is None:
+        low = -1000
+    if high is None:
+        high = 1000
+
+    estimates = np.linspace(low, high, 5)
+    best_estimate = grad_descent_v1(func, deriv, start=estimates[0])
+    for x in estimates:
+        temp_estimate = grad_descent_v1(func, deriv, start=x)
+        if func(temp_estimate) < func(best_estimate):
+            best_estimate = x
+
+    return best_estimate
+
+# print('grad_descent_v2:\n', grad_descent_v2(
+#     lambda x:
+#     x ** 8 + x ** 7 + x ** 6 + x ** 5 + x ** 4 + x ** 3 + x ** 2 + x + 2,
+#     lambda x:
+#     8 * (x ** 7) + 7 * (x ** 6) + 6 * (x ** 5) + 5 * (x ** 4) + 4 * (x ** 3) +
+#     3 * (x ** 2) + 2 * (x ** 1) + x, low=-1.5, high=1.0))
+
+-0.0001596184208375603
+-0.00015912799395831836
+
+import numpy as np
+
+
+
+def grad_descent_v2(func, deriv, low=None, high=None, callback=None):
+    if low is None:
+        low = -1000
+    if high is None:
+        high = 1000
+
+    best_estimates = []
+
+    def grad_descent_v1(func, deriv, start=None):
+        if start is None:
+            np.random.seed(179)
+            start = np.random.randn()
+        estimate = start
+
+        def sign(number):
+            return 1.0 if number >= 0 else -1.0
+
+        def regression(length, estimate, step):
+            first = estimate
+            sign_f = sign(first)
+            for _ in range(length):
+                if sign(deriv(estimate)) == sign_f:
+                    estimate = estimate - sign(first) * step
+                else:
+                    return estimate
+            return estimate
+
+        step = 2.0
+        for _ in range(100):
+            estimate = regression(100, estimate, step)
+            step /= 1.0005
+        return estimate
+
+    estimates = np.linspace(low + 0.000001, high + 1, 300)
+    best_estimate = grad_descent_v1(func, deriv, start=estimates[0])
+    best_estimates.append(best_estimate)
+    for x in estimates:
+        temp_estimate = grad_descent_v1(func, deriv, start=x)
+        if func(temp_estimate) < func(best_estimate):
+            best_estimate = temp_estimate
+            best_estimates.append(temp_estimate)
+
+
+    plt.figure(figsize=(10, 7))
+    x = np.linspace(low, high, 1000)
+    y = [func(xn) for xn in x]
+    plt.plot(x, y)
+    plt.ylabel("Y")
+    plt.xlabel("X")
+    plt.plot(best_estimates, [func(xn) for xn in best_estimates])
+    plt.scatter(best_estimates, [func(xn) for xn in best_estimates], lw=5)
+    plt.show()
+    # print(best_estimates, func(0.0))
+    return best_estimate
+
+# print('grad_descent_v2:\n', grad_descent_v2(
+#     lambda x:
+#     x ** 8 + x ** 7 + x ** 6 + x ** 5 + x ** 4 + x ** 3 + x ** 2 + x + 2,
+#     lambda x:
+#     8 * (x ** 7) + 7 * (x ** 6) + 6 * (x ** 5) + 5 * (x ** 4) + 4 * (x ** 3) +
+#     3 * (x ** 2) + 2 * (x ** 1) + x, low=-1.5, high=1.0))
+
+# print('grad_descent_v2:\n', grad_descent_v2(
+#     lambda x:
+#     x**6 + 3 * x**3 + x**2 - 2 * x + 1.0,
+#     lambda x: 6 * x**5 + 9 * x **2 + 2 * x - 2.0
+#     , low=-3.0, high=3.0))
+
+print('grad_descent_v2:\n', grad_descent_v2(
+        lambda x: 1 - 3/2 * 1/x * np.exp(-(np.log(x)) ** 2 / 2 * (3/2) **2),
+        lambda x: (3 * np.exp(-9/8 * (np.log(x))**2) * (4 + 9 * np.log(x)))/(8 * x**2),
+        low=0, high=2))
