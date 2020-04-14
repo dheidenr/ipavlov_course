@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import math
 import sys
 
-
 def f(x):
     return x ** 4 + 5 * x ** 3 - 10 * x
 
@@ -326,18 +325,18 @@ def grad_descent_v2(func, deriv, low=None, high=None, callback=None):
     # print(best_estimates, func(0.0))
     return best_estimate
 
-# print('grad_descent_v2:\n', grad_descent_v2(
-#     lambda x:
-#     x ** 8 + x ** 7 + x ** 6 + x ** 5 + x ** 4 + x ** 3 + x ** 2 + x + 2,
-#     lambda x:
-#     8 * (x ** 7) + 7 * (x ** 6) + 6 * (x ** 5) + 5 * (x ** 4) + 4 * (x ** 3) +
-#     3 * (x ** 2) + 2 * (x ** 1) + x, low=-1.5, high=1.0))
+print('grad_descent_v2:\n', grad_descent_v2(
+    lambda x:
+    x ** 8 + x ** 7 + x ** 6 + x ** 5 + x ** 4 + x ** 3 + x ** 2 + x + 2,
+    lambda x:
+    8 * (x ** 7) + 7 * (x ** 6) + 6 * (x ** 5) + 5 * (x ** 4) + 4 * (x ** 3) +
+    3 * (x ** 2) + 2 * (x ** 1) + x, low=-1.5, high=1.0))
 
-# print('grad_descent_v2:\n', grad_descent_v2(
-#     lambda x:
-#     x**6 + 3 * x**3 + x**2 - 2 * x + 1.0,
-#     lambda x: 6 * x**5 + 9 * x **2 + 2 * x - 2.0
-#     , low=-3.0, high=3.0))
+print('grad_descent_v2:\n', grad_descent_v2(
+    lambda x:
+    x**6 + 3 * x**3 + x**2 - 2 * x + 1.0,
+    lambda x: 6 * x**5 + 9 * x **2 + 2 * x - 2.0
+    , low=-3.0, high=3.0))
 
 print('grad_descent_v2:\n', grad_descent_v2(
         lambda x: 1 - 3/2 * 1/x * np.exp(-(np.log(x)) ** 2 / 2 * (3/2) **2),

@@ -85,6 +85,7 @@ def grad_descent_2d(func, low=-5.0, high=5.0, callback=None):
     #         start = np.random.randn()
     #     estimate = start
     #
+    #
     #     def sign(number):
     #         return 1.0 if number >= 0 else -1.0
     #
@@ -115,47 +116,75 @@ def grad_descent_2d(func, low=-5.0, high=5.0, callback=None):
 
     # f = open('logs.txt', 'w')
 
-    def sign(number):
-        return 1.0 if number >= 0 else -1.0
+    # def sign(number):
+    #     return 1.0 if number >= 0 else -1.0
 
     epsilon = 0.001
+    epsilon2 = 0.001
+    assumption = 0.01
+    max_steps = 4000
     ordinates = []
     deriv = numerical_derivative_2d(func, epsilon)
-    x = [high, high]
-    log_steps = 0
+    # x = [high, high]
+    # steps = 0
+    #
+    # print(func(x), x[0], x[1])
+    linex0 = np.linspace(low, high, 5)
+    linex1 = np.linspace(low, high, 5)
 
-    print(func(x), x[0], x[1])
-    linex = np.linspace(low, high, 100)
-    line = []
-    for x in linex:
-        line.append([x, x])
+    mesh = np.meshgrid(linex0, linex1)
+
+    # for x in linex0:
+    #     line.append([np.random.uniform(low, high), np.random.uniform(low, high)])
+    # print(np.meshgrid(linex, linex))
+    # mesh = np.meshgrid(linex, linex)
     min = [low, low]
-    for x in line:
-        log_steps = 0
+    x = [np.array(mesh[0]).flatten()[0], np.array(mesh[0]).flatten()[1]]
+    # print(mesh)
+    for x[0], x[1] in zip(np.array(mesh[0]).flatten(), np.array(mesh[1]).flatten()):
+        steps = 0
         # print('x=', x)
-        while 0.0001 < abs(deriv(x)[0]) and x[0] <= high and x[1] <= high and x[0] >= low and x[1] >= low and log_steps <= 500000:
-            x[0] = x[0] - epsilon * deriv(x)[0]
-            x[1] = x[1] - epsilon * deriv(x)[1]
+        while assumption < abs(deriv(x)[0]) and assumption < abs(deriv(x)[1]) and x[0] <= high and x[1] <= high and x[0] >= low and x[1] >= low and steps <= max_steps:
+            x[0] = x[0] - epsilon2 * deriv(x)[0]
+            x[1] = x[1] - epsilon2 * deriv(x)[1]
             if func(x) > func(min):
                 min[0] = x[0]
                 min[1] = x[1]
                 ordinates.append(x)
             d = func(x)
-            log_steps += 1
+            steps += 1
             # f.write('x0: ' + str(x[0]) + '  \ty1: ' + str(x[1]) + str(
-            #     func(x)) + '  \tstep:' + str(log_steps) + '\n')
-        # print(log_steps)
-    print(min[0], min[1], func(min), deriv(min))
+            #     func(x)) + '  \tstep:' + str(steps) + '\n')
+        # print(steps)
+    # print(min[0], min[1], func(min), deriv(min))
     # f.close()
     # draw_3d(ordinates, func)
     draw(ordinates, func, low, high)
-    return min
+    return np.array(min)
 
 
-print(grad_descent_2d(lambda x: (-1 / ((x[0] - 1) ** 2 + (x[1] - 1.5) ** 2 + 1)
+result = []
+for _ in range(1):
+    print('step:', _)
+    result.append(grad_descent_2d(lambda x: (-1 / ((x[0] - 1) ** 2 + (x[1] - 1.5) ** 2 + 1)
                                  * np.cos(
             2 * (x[0] - 1) ** 2 + 2 * (x[1] - 1.5) ** 2)
                                  ), low=1.0, high=2.0))
+
+
+func = lambda x: (-1 / ((x[0] - 1) ** 2 + (x[1] - 1.5) ** 2 + 1)
+                                 * np.cos(
+            2 * (x[0] - 1) ** 2 + 2 * (x[1] - 1.5) ** 2)
+                                 )
+minimum = min(result, key= lambda x: func(x))
+print('min:', minimum,'func(min):', func(minimum))
+
+
+
+    # print(grad_descent_2d(lambda x: (-1 / ((x[0] - 1) ** 2 + (x[1] - 1.5) ** 2 + 1)
+    #                              * np.cos(
+    #         2 * (x[0] - 1) ** 2 + 2 * (x[1] - 1.5) ** 2)
+    #                              ), low=1.0, high=2.0))
 
 # print ('{},{}, low={}, high={}'.format(inspect.getsource(func), inspect.getsource(deriv), low, high))
 
@@ -172,5 +201,43 @@ print(grad_descent_2d(lambda x: (-1 / ((x[0] - 1) ** 2 + (x[1] - 1.5) ** 2 + 1)
 # ax.plot_wireframe(x, y, z)
 # ax.legend()
 # plt.show()
+
+
+# print(np.random.uniform(-5.0, 5.0))
+
+
+x = np.array([1, 2, 3])
+y = np.array([4, 5, 6])
+
+for i in y:
+    x0 = i
+    for d in x:
+        x1 = d
+        print(x1, end=' ')
+        print(x0)
+
+mesh = np.meshgrid(x, y)
+print('x=', x)
+print('y=', y)
+print('mesh')
+print(mesh)
+print('meshgrid[0]=', mesh[0])
+print('meshgrid[1]=', mesh[1])
+
+for x, y in zip(np.array(mesh[0]).flatten(), np.array(mesh[1]).flatten()):
+     print('x=', x, 'y=', y)
+
+print('combo', np.array(mesh[0]).flatten())
+print('combo', np.array(mesh[1]).flatten())
+
+linex0 = np.linspace(-5.0, 5.0, 4)
+linex1 = np.linspace(-5.0, 5.0, 4)
+
+mesh = np.meshgrid(linex0, linex1)
+print(linex0)
+print(linex1)
+print(mesh)
+print(mesh[1][1][1])
+
 
 
