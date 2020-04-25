@@ -180,7 +180,6 @@ minimum = min(result, key= lambda x: func(x))
 print('min:', minimum,'func(min):', func(minimum))
 
 
-
     # print(grad_descent_2d(lambda x: (-1 / ((x[0] - 1) ** 2 + (x[1] - 1.5) ** 2 + 1)
     #                              * np.cos(
     #         2 * (x[0] - 1) ** 2 + 2 * (x[1] - 1.5) ** 2)
