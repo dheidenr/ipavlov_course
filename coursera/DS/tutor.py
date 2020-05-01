@@ -90,3 +90,6 @@ def int_to_str_list(numbers):
 print(int_to_str_list(l))
 
 kartej = (1, 'asdf', 3)
+
+
+print(', '.join({}.get('2')))
