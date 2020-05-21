@@ -1,3 +1,4 @@
+import re
 
 
 def pig_it(line):
@@ -8,5 +9,11 @@ def pig_it(line):
     return ' '.join(list_line)
 
 
+def pig_it_(line):
+    words = re.findall(r'\b\w+\b', line)
+    return ' '.join([i[1:] + i[0] + 'ay' for i in words])
+
+
 if __name__ == "__main__":
     print(pig_it('Pig , latin is cool ! '))
+    print(pig_it_('Pig, latin is cool!'))

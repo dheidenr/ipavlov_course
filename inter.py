@@ -1,4 +1,5 @@
 
+
 def cude_odd(numbers):
     sum = 0
     for i in numbers:

@@ -1,0 +1,3 @@
+file2_str1
+file2_str2
+file2_str3

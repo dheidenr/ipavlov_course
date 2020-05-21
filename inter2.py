@@ -1,4 +1,5 @@
 
+
 def find_even_index(numbers):
     for i in range(len(numbers)):
         if sum(numbers[0:i]) == sum(numbers[i + 1:len(numbers)]):
@@ -6,8 +7,9 @@ def find_even_index(numbers):
     return -1
 
 
-def find_even_index_(numbers):
-    return [i for i in range(len(numbers)) if sum(numbers[:i]) == sum(numbers[i + 1:])][0]
+def find_even_index_(numbers) -> int:
+    return next(i for i in range(len(numbers))
+                if sum(numbers[:i]) == sum(numbers[i + 1:]))
 
 
 if __name__ == '__main__':

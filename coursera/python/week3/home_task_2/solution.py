@@ -1,7 +1,8 @@
 import os.path
 import csv
 
-
+# Ссылка в помощь к этому заданию
+# https://www.coursera.org/learn/diving-in-python/programming/bd6aI/klassy-i-nasliedovaniie/discussions/threads/4lBKgugvRpiQSoLoL6aYEQ
 class CarBase:
     car_type = ''
 
@@ -121,8 +122,6 @@ def get_car_list(csv_filename):
                 line['passenger_seats_count'])
             car.car_type = line["car_type"]
             car_list.append(car)
-
-
         elif line["car_type"] == 'truck':
             # if line['body_whl'] == '':
             #     continue

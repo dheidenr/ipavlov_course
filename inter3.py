@@ -1,3 +1,5 @@
+import re
+
 
 def error_rate(line):
     error = 0
@@ -7,8 +9,12 @@ def error_rate(line):
     return f'{error}/{len(line)}'
 
 
-def error_rate_(line):
-    return f'{sum([1 for i in line if i < "a" or i > "m"])}/{len(line)}'
+# def error_rate_(line) -> str:
+#     return f'{sum([True for i in line if i < "a" or i > "m"])}/{len(line)}'
+
+
+def error_rate_(line) -> str:
+    return f'{len(re.findall(r"[^a-m]", line))}/{len(line)}'
 
 
 if __name__ == "__main__":
